@@ -1,0 +1,409 @@
+{% from 'icons.html' import icon %}
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="{{ profile.name }} | {{ profile.title }}">
+    <title>{{ profile.name }} | {{ profile.title }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+      (function () {
+        try {
+          const savedTheme = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (error) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+        document.documentElement.classList.add('js');
+      })();
+    </script>
+  </head>
+  <body data-github-username="{{ github_username }}">
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <div id="loader" class="loader" aria-live="polite" aria-label="Loading">
+      <div class="loader__line"></div>
+      <div class="loader__line"></div>
+      <div class="loader__line"></div>
+      <div class="loader__dot"></div>
+    </div>
+
+    <div class="page-shell">
+      <aside class="trail" aria-label="Section navigation">
+        <div class="trail__top">
+          <div class="trail__avatar-wrap">
+            <img src="/images/profile.jpg" alt="{{ profile.name }} portrait" class="trail__avatar">
+          </div>
+          <div class="trail__name-wrap">
+            <span class="trail__name">{{ profile.name }}</span>
+          </div>
+        </div>
+
+        <nav class="trail__nav" aria-label="Main navigation">
+          <a href="#top" class="trail__link is-active" aria-current="page">
+            <span class="trail__node"></span>
+            <span class="trail__label">Top</span>
+          </a>
+          <a href="#about" class="trail__link">
+            <span class="trail__node"></span>
+            <span class="trail__label">About</span>
+          </a>
+          <a href="#education" class="trail__link">
+            <span class="trail__node"></span>
+            <span class="trail__label">Education</span>
+          </a>
+          <a href="#skills" class="trail__link">
+            <span class="trail__node"></span>
+            <span class="trail__label">Skills</span>
+          </a>
+          <a href="#projects" class="trail__link">
+            <span class="trail__node"></span>
+            <span class="trail__label">Projects</span>
+          </a>
+          <a href="#github" class="trail__link">
+            <span class="trail__node"></span>
+            <span class="trail__label">GitHub</span>
+          </a>
+          <a href="#experience" class="trail__link">
+            <span class="trail__node"></span>
+            <span class="trail__label">Experience</span>
+          </a>
+          <a href="#achievements" class="trail__link">
+            <span class="trail__node"></span>
+            <span class="trail__label">Awards</span>
+          </a>
+          <a href="#contact" class="trail__link">
+            <span class="trail__node"></span>
+            <span class="trail__label">Contact</span>
+          </a>
+        </nav>
+
+        <button class="theme-toggle" type="button" aria-label="Toggle color theme">
+          {{ icon('sun', 18) }}
+          {{ icon('moon', 18) }}
+        </button>
+      </aside>
+
+      <div class="mobile-bar" aria-label="Mobile navigation">
+        <div class="mobile-bar__brand">{{ profile.name }}</div>
+        <div class="mobile-bar__actions">
+          <button class="theme-toggle" type="button" aria-label="Toggle color theme">
+            {{ icon('sun', 18) }}
+            {{ icon('moon', 18) }}
+          </button>
+          <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu">
+            {{ icon('menu', 20) }}
+          </button>
+        </div>
+      </div>
+
+      <div class="mobile-menu-backdrop" hidden></div>
+      <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile menu" aria-hidden="true">
+        <div class="mobile-menu__header">
+          <span>{{ profile.name }}</span>
+          <button type="button" class="menu-close" aria-label="Close menu">{{ icon('close', 20) }}</button>
+        </div>
+        <a href="#top" class="mobile-menu__link">Top</a>
+        <a href="#about" class="mobile-menu__link">About</a>
+        <a href="#education" class="mobile-menu__link">Education</a>
+        <a href="#skills" class="mobile-menu__link">Skills</a>
+        <a href="#projects" class="mobile-menu__link">Projects</a>
+        <a href="#github" class="mobile-menu__link">GitHub</a>
+        <a href="#experience" class="mobile-menu__link">Experience</a>
+        <a href="#achievements" class="mobile-menu__link">Awards</a>
+        <a href="#contact" class="mobile-menu__link">Contact</a>
+      </nav>
+
+      <main id="content" class="content">
+        <section id="top" class="hero section reveal">
+          <div class="hero__copy">
+            <p class="eyebrow">Hi, I'm</p>
+            <h1>{{ profile.name }}</h1>
+            <h2><span class="accent-text">{{ profile.title }}</span></h2>
+            <p class="lead">{{ profile.intro }}</p>
+            <div class="hero__actions">
+              <a class="button primary" href="#projects">See my projects</a>
+              <a class="button ghost" href="#contact">Contact me</a>
+              <button class="button ghost" id="save-pdf" type="button">Save as PDF</button>
+            </div>
+            <div class="social-links" aria-label="Social media links">
+              {% if links.github %}
+              <a href="{{ links.github }}" class="social-link" target="_blank" rel="noreferrer" aria-label="GitHub profile">
+                {{ icon('github', 18) }}
+              </a>
+              {% endif %}
+              {% if links.linkedin %}
+              <a href="{{ links.linkedin }}" class="social-link" target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+                {{ icon('linkedin', 18) }}
+              </a>
+              {% endif %}
+              {% if links.facebook %}
+              <a href="{{ links.facebook }}" class="social-link" target="_blank" rel="noreferrer" aria-label="Facebook profile">
+                {{ icon('facebook', 18) }}
+              </a>
+              {% endif %}
+              <a href="mailto:{{ basic_info.email }}" class="social-link" aria-label="Email me">
+                {{ icon('mail', 18) }}
+              </a>
+            </div>
+          </div>
+
+          <div class="hero__visual">
+            <div class="portrait-wrap">
+              <div class="portrait-offset"></div>
+              <img src="/images/profile.jpg" alt="Portrait of {{ profile.name }}" class="portrait">
+            </div>
+            <div class="floating-badge">
+              <span class="status-dot"></span>
+              {{ profile.open_to }}
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="section reveal">
+          <div class="section-heading">
+            <p class="eyebrow">About</p>
+            <h3>Making ideas easy to use.</h3>
+          </div>
+          <div class="about-grid">
+            <div>
+              <p>{{ profile.intro }}</p>
+              <p>{{ profile.career_objective }}</p>
+            </div>
+            <aside class="info-card">
+              <dl>
+                <div>
+                  <dt>Location</dt>
+                  <dd>{{ basic_info.location }}</dd>
+                </div>
+                {% if basic_info.email %}
+                <div>
+                  <dt>Email</dt>
+                  <dd><a href="mailto:{{ basic_info.email }}">{{ basic_info.email }}</a></dd>
+                </div>
+                {% endif %}
+                {% if basic_info.phone %}
+                <div>
+                  <dt>Phone</dt>
+                  <dd><a href="tel:{{ basic_info.phone }}">{{ basic_info.phone }}</a></dd>
+                </div>
+                {% endif %}
+                <div>
+                  <dt>GitHub</dt>
+                  <dd><a href="{{ basic_info.github }}" target="_blank" rel="noreferrer">{{ github_username }}</a></dd>
+                </div>
+              </dl>
+              <div class="chip-group">
+                {% for interest in profile.career_interests %}
+                <span class="chip">{{ interest }}</span>
+                {% endfor %}
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="education" class="section reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Education</p>
+            <h3>Learning with real product work.</h3>
+          </div>
+          <div class="timeline">
+            {% for item in education %}
+            <article class="timeline-item">
+              <div class="timeline-node"></div>
+              <div class="timeline-content">
+                <span class="timeline-year">{{ item.period }}</span>
+                <h4>{{ item.school }}</h4>
+                <p class="timeline-degree">{{ item.degree }}</p>
+                <p>{{ item.notes }}</p>
+              </div>
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section id="skills" class="section reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Skills</p>
+            <h3>Tools I use to ship reliable solutions.</h3>
+          </div>
+          <div class="skill-grid">
+            {% for group in skills %}
+            <article class="skill-card">
+              <h4>{{ group.title }}</h4>
+              {% for skill in group.skills %}
+              <div class="skill-row" data-level="{{ skill.level }}">
+                <div class="skill-row__top">
+                  <span>{{ skill.name }}</span>
+                  <span>{{ skill.level }}/5</span>
+                </div>
+                <div class="skill-meter" aria-label="{{ skill.name }} skill level {{ skill.level }} out of 5">
+                  <span class="skill-meter__segment"></span>
+                  <span class="skill-meter__segment"></span>
+                  <span class="skill-meter__segment"></span>
+                  <span class="skill-meter__segment"></span>
+                  <span class="skill-meter__segment"></span>
+                </div>
+              </div>
+              {% endfor %}
+            </article>
+            {% endfor %}
+          </div>
+          <div class="chip-group chip-group--soft">
+            {% for skill in soft_skills %}
+            <span class="chip chip--soft">{{ skill }}</span>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section id="projects" class="section reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Projects</p>
+            <h3>Selected work with real product thinking.</h3>
+          </div>
+          <div class="project-list">
+            {% for project in projects %}
+            <article class="project-card">
+              <div class="project-preview {{ project.placeholder }}" aria-hidden="true">
+                <div class="browser-window">
+                  <div class="browser-window__bar">
+                    <span></span><span></span><span></span>
+                    <div class="browser-window__address">{{ project.live_demo }}</div>
+                  </div>
+                  {% if project.placeholder == 'navy-grid' %}
+                  <div class="project-placeholder project-placeholder--navy">
+                    <div class="project-placeholder__grid"></div>
+                  </div>
+                  {% elif project.placeholder == 'peach-dot' %}
+                  <div class="project-placeholder project-placeholder--peach">
+                    <div class="project-placeholder__dots"></div>
+                  </div>
+                  {% else %}
+                  <div class="project-placeholder project-placeholder--plain"></div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="project-body">
+                <p class="project-kind">{{ project.kind }}</p>
+                <h4>{{ project.name }}</h4>
+                <p>{{ project.description }}</p>
+                <ul>
+                  {% for highlight in project.highlights %}
+                  <li>{{ highlight }}</li>
+                  {% endfor %}
+                </ul>
+                <div class="tag-list">
+                  {% for tech in project.tech %}
+                  <span class="tag">{{ tech }}</span>
+                  {% endfor %}
+                </div>
+                <div class="project-actions">
+                  {% if project.live_demo %}
+                  <a class="button primary" href="{{ project.live_demo }}" target="_blank" rel="noreferrer">Live demo</a>
+                  {% endif %}
+                  {% if project.github %}
+                  <a class="button ghost" href="{{ project.github }}" target="_blank" rel="noreferrer">Source code</a>
+                  {% endif %}
+                </div>
+              </div>
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section id="github" class="section reveal">
+          <div class="github-panel">
+            <div class="github-panel__avatar">
+              <img src="https://github.com/{{ github_username }}.png" alt="{{ github_username }} GitHub avatar" width="80" height="80">
+            </div>
+            <div class="github-panel__content">
+              <p class="eyebrow">GitHub</p>
+              <h3>@{{ github_username }}</h3>
+              <p>Building projects that solve practical problems and improve how people interact with systems.</p>
+              <div class="github-stats" hidden>
+                <div class="github-stat"><span class="label">Repos</span><strong data-github="public_repos">0</strong></div>
+                <div class="github-stat"><span class="label">Followers</span><strong data-github="followers">0</strong></div>
+                <div class="github-stat"><span class="label">Joined</span><strong data-github="created_at">0</strong></div>
+              </div>
+              <a class="button primary" href="{{ basic_info.github }}" target="_blank" rel="noreferrer">Visit my GitHub</a>
+            </div>
+          </div>
+        </section>
+
+        <section id="experience" class="section reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Experience</p>
+            <h3>Project leadership and product delivery.</h3>
+          </div>
+          <div class="timeline timeline--experience">
+            {% for item in experience %}
+            <article class="timeline-item timeline-item--experience">
+              <div class="timeline-node"></div>
+              <div class="timeline-content">
+                <span class="timeline-year">{{ item.period }}</span>
+                <h4>{{ item.role }}</h4>
+                <p class="timeline-degree">{{ item.company }}</p>
+                <p>{{ item.description }}</p>
+              </div>
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section id="achievements" class="section reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Achievements</p>
+            <h3>Milestones and development progress.</h3>
+          </div>
+          <div class="achievement-grid">
+            {% for item in achievements %}
+            <article class="achievement-card">
+              <span class="achievement-year">{{ item.year }}</span>
+              <h4>{{ item.title }}</h4>
+              <p>{{ item.issuer }}</p>
+            </article>
+            {% endfor %}
+          </div>
+        </section>
+
+        <section id="contact" class="section reveal">
+          <div class="contact-panel">
+            <p class="eyebrow">Contact</p>
+            <h3>Let’s work together.</h3>
+            {% if basic_info.email %}
+            <a href="mailto:{{ basic_info.email }}" class="contact-email">{{ basic_info.email }}</a>
+            <div class="contact-actions">
+              <button class="button primary" id="copy-email" type="button">Copy email</button>
+            </div>
+            {% endif %}
+            <div class="social-links social-links--pill">
+              {% if links.github %}
+              <a href="{{ links.github }}" class="social-link social-link--pill" target="_blank" rel="noreferrer">GitHub</a>
+              {% endif %}
+              {% if links.linkedin %}
+              <a href="{{ links.linkedin }}" class="social-link social-link--pill" target="_blank" rel="noreferrer">LinkedIn</a>
+              {% endif %}
+              {% if links.facebook %}
+              <a href="{{ links.facebook }}" class="social-link social-link--pill" target="_blank" rel="noreferrer">Facebook</a>
+              {% endif %}
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <p>© {{ current_year }} {{ profile.name }}. Built with Python (Flask) and deployed on Vercel.</p>
+      <a href="#top">Back to top</a>
+    </footer>
+
+    <script src="/js/main.js"></script>
+  </body>
+</html>

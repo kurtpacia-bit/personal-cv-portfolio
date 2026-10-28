@@ -1,0 +1,62 @@
+{% from 'icons.html' import icon %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page not found | {{ profile.name }}</title>
+    <meta name="description" content="Page not found.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="stylesheet" href="/css/style.css">
+    <script>
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.classList.add('js');
+    </script>
+    <style>
+      body {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 2rem;
+      }
+      .not-found {
+        width: min(100%, 560px);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 2rem;
+        padding: 3rem 2rem;
+        box-shadow: 0 30px 70px rgba(20, 33, 61, 0.12);
+      }
+      .not-found h1 {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        margin-bottom: 0.5rem;
+      }
+      .not-found p {
+        color: var(--muted);
+        margin-bottom: 1.5rem;
+      }
+      .not-found a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="not-found">
+      <p class="eyebrow">404 error</p>
+      <h1>Page not found.</h1>
+      <p>The link you followed may be outdated or the page may have moved. Let’s head back to the portfolio.</p>
+      <a class="button primary" href="/">
+        {{ icon('arrow-right', 18) }}
+        <span>Back to home</span>
+      </a>
+    </main>
+  </body>
+</html>
