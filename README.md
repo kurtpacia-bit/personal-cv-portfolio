@@ -1,4 +1,4 @@
-# Kenth Repollo | CV Website
+# kurt john philip pacia| CV Website
 
 A personal CV and portfolio website for an IT student and full-stack developer. The project is built with Python and Flask, uses Jinja templates and plain HTML, CSS and JavaScript, and is ready to deploy on Vercel with a zero-configuration Flask setup.
 
@@ -12,7 +12,7 @@ A personal CV and portfolio website for an IT student and full-stack developer. 
 - Vercel
 
 ## Student name
-Kenth Repollo
+ kurt john philip pacia
 
 ## Live Vercel link
 https://your-project-name.vercel.app/
